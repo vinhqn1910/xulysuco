@@ -12,7 +12,6 @@
 
 <body>
   <div class="form-container">
-    <br><br><br><br><br>
     <h1>Báo cáo sự cố giao hàng</h1>
     <form id="incidentForm">
       <p>Copyright @Thành Vĩnh</p>
@@ -39,8 +38,8 @@
       <label for="userbaocao">User báo sự cố:</label>
       <input type="text" id="userbaocao" name="userbaocao" required placeholder="Tên user" >
 
-      <label for="phiNhapDSD">Phí nhập ĐSD:</label>
-      <input type="text" id="phiNhapDSD" name="phiNhapDSD" placeholder="Nhập phí (VNĐ)"  autocomplete="off">
+      <label for="compensationAmount" id="compensationAmount-label"">Số Tiền Đền</label>
+      <input type="text" id="compensationAmount" name="compensationAmount" placeholder="Số tiền đền" oninput="formatCurrency(this)" autocomplete="off">
 
       <label for="note">Thông tin thêm:</label>
       <textarea id="note" name="note" placeholder="Nhập thông tin thêm"></textarea>
@@ -54,7 +53,22 @@
   </div>
 
   <script type="module" src="script.js"></script>
+<script>
+          // XỬ LÝ DẤU PHẨY KHI NHẬP VÀO Ô CHỐT ĐỀN
+          function formatCurrency(input) {
+            // Lấy giá trị của input
+            let value = input.value;
 
+            // Xóa tất cả các ký tự không phải là số
+            value = value.replace(/[^\d]/g, '');
+
+            // Định dạng lại số và thêm dấu phẩy
+            value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+            // Cập nhật lại giá trị cho input
+            input.value = value;
+        }
+</script>
   <!-- Firebase Scripts -->
   <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore-compat.js"></script>
